@@ -84,14 +84,14 @@ public class Main{
 		{ 
 			String data = ""; 
 			data = new String(Files.readAllBytes(Paths.get(path))); 
-			return data; 
+			return data.trim(); 
 		}
 
 		/*
 		Metodo principal de la clase para la transformacion de los textos en infix a postfix
 		devuelve el texto en postfix
-		*/
 		public static String getPostfix() throws Exception 
+		*/
 		{
 			String string_infix = readFileAsString();
 			String string_postfix = inf_postfix(string_infix);
@@ -102,7 +102,9 @@ public class Main{
 	
 	public static void main(String args[]) throws Exception
 	{
-		
+		/*
+		Obtiene de forma postfix lo que se debe calcular.
+		*/
 		String postfix = Convert.getPostfix();
 		System.out.println(postfix);
 	}

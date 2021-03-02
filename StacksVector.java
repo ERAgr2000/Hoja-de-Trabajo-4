@@ -1,0 +1,1 @@
+public class StacksVector<T> extends Stacks{}

@@ -5,7 +5,7 @@ public class StacksArray extends Stacks{
 	private ArrayList<String> stack = new ArrayList();
 	
 	
-	private void push(Object t)
+	public void push(Object t)
 	{
 		String character = t.toString();
 		stack.add(character);
@@ -14,8 +14,9 @@ public class StacksArray extends Stacks{
 	public Object pop()
 	{
 		
-		stack.get(stack.size() - 1);
-		return new Object();
+		String numero = stack.get(stack.size() - 1);
+		stack.remove(stack.size() - 1);
+		return numero;
 		
 	}
 	

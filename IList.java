@@ -1,2 +1,5 @@
-public interface IList{
+public interface IList<T extends INodo>{
+	
+	
+	
 }

@@ -1,8 +1,8 @@
 import java.util.ArrayList; 
 
-public class Calculadora<T extends Stacks>
+public class Calculadora
 {
-	private Stacks<String> stack = new ArrayList();
+	private Stacks stack;
 	private static Calculadora calculadora = new Calculadora();
 
     private Calculadora() 
@@ -10,6 +10,15 @@ public class Calculadora<T extends Stacks>
 		
     }
 	
+	private Calculadora(Stacks pila) 
+	{
+		stack = pila;
+    }
+	
+	public static void setinstance(Stacks pila)
+	{
+		calculadora = new Calculadora(pila);
+	}
 	//Calcular, hace el calculo de la expresion postfix
 	//Parametro el string de postfix
 	//Devuelve el valor en Number
@@ -24,75 +33,73 @@ public class Calculadora<T extends Stacks>
 			
 			if( Character.isDigit(character_actual) )
 			{
-				stack.add(character_actual.toString());
+				stack.push((Object)character_actual);
 			}
 			else if(character_actual == '+')
 			{
-				String last = stack.pop();//
-				stack.remove(stack.size() - 1);
+				String last = stack.pop().toString();//
+				//stack.remove(stack.size() - 1);
 				Float numB = Float.parseFloat(last);
+				//System.out.println(numB);
 				
-				
-				last = stack.get(stack.size() - 1);
-				stack.remove(stack.size() - 1);
+				last = stack.pop().toString();
+				//stack.remove(stack.size() - 1);
 				Float numA = Float.parseFloat(last);
 				
 				resultado = numA + numB;
 				String resStr = resultado.toString();
-				stack.add(resStr);
-				System.out.println("SUMA");
+				stack.push(resStr);
+				//System.out.println("SUMA");
 			}
 			else if(character_actual == '-')
 			{
-				String last = stack.get(stack.size() - 1);
-				stack.remove(stack.size() - 1);
+				String last = stack.pop().toString();
+				//stack.remove(stack.size() - 1);
 				Float numB = Float.parseFloat(last);
 				
 				
-				last = stack.get(stack.size() - 1);
-				stack.remove(stack.size() - 1);
+				last = stack.pop().toString();
+				//stack.remove(stack.size() - 1);
 				Float numA = Float.parseFloat(last);
 				
 				resultado = numA - numB;
 				String resStr = resultado.toString();
-				stack.add(resStr);
-				System.out.println("RESt");
+				stack.push(resStr);
+				//System.out.println("RESt");
 			}
 			else if(character_actual == '*')
 			{
-				String last = stack.get(stack.size() - 1);
-				stack.remove(stack.size() - 1);
+				String last = stack.pop().toString();
+				//stack.remove(stack.size() - 1);
 				Float numB = Float.parseFloat(last.toString());
 				
 				
-				last = stack.get(stack.size() - 1);
-				stack.remove(stack.size() - 1);
+				last = stack.pop().toString();
+				//stack.remove(stack.size() - 1);
 				Float numA = Float.parseFloat(last.toString());
 				
 				resultado = numA * numB;
 				String resStr = resultado.toString();
-				stack.add(resStr);
-								System.out.println("MULT");
+				stack.push(resStr);
 			}
 			else if(character_actual == '/')
 			{
-				String last = stack.get(stack.size() - 1);
-				stack.remove(stack.size() - 1);
+				String last = stack.pop().toString();
+				//stack.remove(stack.size() - 1);
 				Float numB = Float.parseFloat(last.toString());
 				
 				
-				last = stack.get(stack.size() - 1);
-				stack.remove(stack.size() - 1);
+				last = stack.pop().toString();
+				//stack.remove(stack.size() - 1);
 				Float numA = Float.parseFloat(last.toString());
 				
 				resultado = numA/numB;
 				String resStr = resultado.toString();
-				stack.add(resStr);
-				System.out.println("DIV");
+				stack.push(resStr);
 			}
 		}
 		
-		String last = stack.get(stack.size() - 1);
+		Object last = stack.pop();
 		resultado = Float.parseFloat(last.toString());
 		return resultado;
 	}

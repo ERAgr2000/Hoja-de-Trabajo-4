@@ -185,15 +185,76 @@ public class Main{
 		}
 	}
 	
+	private static Stacks usingstack(Integer option, boolean simple_doble) 
+	{
+		Stacks pilausar = null;
+		if(simple_doble)
+		{
+			option = option +1;
+		}
+
+		switch(option){
+			case 1:
+				pilausar = new StacksArray();
+				break;
+			case 2:
+				pilausar = new StacksVector();
+				break;
+			case 3:
+				pilausar = new ListaEncadenada();
+				break;
+			case 4:
+				pilausar = new ListaDoblemente();
+				break;
+		}
+		return pilausar;
+	}
+	
+	private static void print(Object o)
+	{
+		System.out.println(o.toString());
+	}
+	
 	public static void main(String args[]) throws Exception
 	{
+		//Variables de almacenamiento
+		Calculadora calculadora;
+		Stacks pila;
+		int option;
+		boolean simple_doble = false;
 		/*
 		Obtiene de forma postfix lo que se debe calcular.
 		*/
 		String postfix = Convert.getPostfix();
-				
-		Calculadora calculadora = Calculadora.getinstance();
-		System.out.println(calculadora.calcular(postfix));
+		
+		//Se le pide que seleccione el stack a usar
+		while(true)
+		{
+			try
+			{
+				print("Que tipo de pila desea implementar en la calculadora?");
+				print("1. ArrayList \n"+"2. Vector\n"+"3. Lista\n");
+				Scanner sc=new Scanner(System.in);
+				option= sc.nextInt();
+				if(option == 3)
+				{
+					print("La desea doblemente encadenada? 			(ingrese true si es asi)");
+					simple_doble = sc.nextBoolean();
+					break;
+				}
+				else if(option >= 1 && option <= 3)
+				{
+					break;
+				}
+			}catch(Exception e)
+			{
+				print("Ingreso un dato invalido.");
+			}
+		}
+		pila = usingstack(option, simple_doble);
+		Calculadora.setinstance(pila);
+		calculadora = Calculadora.getinstance();
+		print("El resutlado es: "+ calculadora.calcular(postfix));
 		
 		
 	}

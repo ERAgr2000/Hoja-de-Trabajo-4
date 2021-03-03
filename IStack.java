@@ -4,8 +4,5 @@ public interface IStack<T>{
 	
 	public T pop();
 	
-	private void push(T t)
-	{
-		
-	}
+	public void push(T t);
 }
